@@ -29,11 +29,8 @@ void BuilderConfigureMiddleWare(IServiceCollection services)
     services.AddCors();
     services.AddRouting();
     services.AddEndpointsApiExplorer();
-}
 
-void RoutesConfiguration(WebApplication app)
-{
-    app.MapGet("/", () => "Application started! " + app.Environment.EnvironmentName);
+    services.AddControllers();
 }
 #endregion
 
@@ -60,6 +57,8 @@ void AppConfigureMiddleWare(WebApplication app, IWebHostEnvironment env)
     {
         endpoints.MapGet("/",
             async context => { await context.Response.WriteAsync("Application started! " + env.EnvironmentName); });
+
+        endpoints.MapControllers();
     });
 }
 #endregion
